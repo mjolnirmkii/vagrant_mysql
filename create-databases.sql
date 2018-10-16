@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS Secondary default character set = "UTF8" default collate = "utf8_general_ci";
+CREATE DATABASE IF NOT EXISTS Primary default character set = "UTF8" default collate = "utf8_general_ci";
+GRANT USAGE ON *.* TO 'secondary'@'%' IDENTIFIED BY 'Password1';
+GRANT ALL PRIVILEGES ON `Secondary`.* TO 'secondary'@'%';
+GRANT USAGE ON *.* TO 'secondary'@'localhost' IDENTIFIED BY 'Password1';
+GRANT ALL PRIVILEGES ON `Secondary`.* TO 'secondary'@'localhost';
+GRANT USAGE ON *.* TO 'primary'@'%' IDENTIFIED BY 'Password1';
+GRANT ALL PRIVILEGES ON `Primary`.* TO 'primary'@'%';
+GRANT USAGE ON *.* TO 'primary'@'localhost' IDENTIFIED BY 'Password1';
+GRANT ALL PRIVILEGES ON `Primary`.* TO 'primary'@'localhost';
+GRANT CREATE, DROP ON `Primary`.* TO 'admin'@'%' IDENTIFIED BY 'Password1';
+GRANT CREATE, DROP ON `Secondary`.* TO 'admin'@'%' IDENTIFIED BY 'Password1';
+SET password for 'root'@'localhost' = password('Password1');
+SET password for 'root'@'127.0.0.1' = password('Password1');
+SET password for 'root'@'::1' = password('Password1');
